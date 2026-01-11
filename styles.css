@@ -1221,3 +1221,56 @@ p{ color: var(--muted) !important; }
     padding-top: 6px;
   }
 }
+
+/* =========================================================
+   MOBILE MENU – OVERLAY COM FUNDO SÓLIDO
+   ========================================================= */
+
+@media (max-width: 768px){
+
+  /* header sempre acima */
+  .header{
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+    background: var(--bg);
+  }
+
+  /* painel do menu mobile */
+  #mobileMenu{
+    position: fixed;
+    top: 64px; /* altura real do header */
+    left: 0;
+    right: 0;
+    background: var(--panel2);
+    border-bottom: 1px solid var(--stroke);
+    box-shadow: 0 12px 28px rgba(0,0,0,.25);
+    padding: 16px 0;
+    z-index: 1999;
+  }
+
+  #mobileMenu[hidden]{
+    display: none;
+  }
+
+  /* fundo escurecido atrás do menu */
+  body:has(#mobileMenu:not([hidden]))::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.35);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+  }
+
+  /* menu em primeiro plano */
+  #mobileMenu{
+    z-index: 1500;
+  }
+
+  /* evita clique no conteúdo por baixo */
+  body:has(#mobileMenu:not([hidden])) main{
+    pointer-events: none;
+    user-select: none;
+  }
+}

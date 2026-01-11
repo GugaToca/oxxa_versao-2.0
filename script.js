@@ -321,3 +321,18 @@ $("#shuffleBtn")?.addEventListener("click", () => {
   updateView();
   toast("Atualizado", "Mercados misturados.");
 });
+
+// Fecha menu mobile ao clicar fora
+document.addEventListener("click", (e) => {
+  const menu = document.getElementById("mobileMenu");
+  const burger = document.getElementById("burger");
+
+  if (!menu || menu.hasAttribute("hidden")) return;
+
+  // se clicou dentro do menu ou no burger, ignora
+  if (menu.contains(e.target) || burger.contains(e.target)) return;
+
+  // fecha menu
+  menu.setAttribute("hidden", "");
+  burger.setAttribute("aria-expanded", "false");
+});
