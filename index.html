@@ -5,22 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OXXA — Mercado de previsões</title>
   <meta name="description" content="Landing page moderna para divulgar um mercado de previsões com contratos de eventos.">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="logo-x.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="index.html" href="logo-x.png">
 
-<meta name="theme-color" content="#1824cf">
-
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1824cf">
 </head>
 
-
 <body>
-  
-
 
   <!-- Background -->
   <div class="bg">
@@ -37,7 +35,7 @@
     <div class="container header__inner">
       <a class="brand" href="#top" aria-label="Ir para o topo">
         <span class="brand__mark brand__mark--img">
-        <img src="logo-x.png" alt="Logo OXXA" />
+          <img src="logo-x.png" alt="Logo OXXA" />
         </span>
         <span class="brand__name">OXXA</span>
       </a>
@@ -56,15 +54,10 @@
         </button>
 
         <a class="btn btn--ghost hide-sm" href="#lista">Entrar na lista</a>
-        <button
-  class="btn btn--primary"
-  id="connectWalletBtn"
-  type="button"
->
-  Conectar carteira
-</button>
 
-
+        <button class="btn btn--primary" id="connectWalletBtn" type="button">
+          Conectar carteira
+        </button>
 
         <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
           <span></span><span></span><span></span>
@@ -84,35 +77,35 @@
     </div>
   </header>
 
-   <!-- Theme Filters -->
-<div id="theme-filters">
-  <div class="container theme-filters__inner">
-    <button data-theme="Geral" class="theme-card active">Geral</button>
-    <button data-theme="Política" class="theme-card">Política</button>
-    <button data-theme="Clima" class="theme-card">Clima</button>
-    <button data-theme="Esporte" class="theme-card">Esporte</button>
+  <!-- Theme Filters (APENAS UMA VEZ) -->
+  <div id="theme-filters">
+    <div class="container theme-filters__inner">
+      <button data-theme="geral" class="theme-card active">Geral</button>
+      <button data-theme="Política" class="theme-card">Política</button>
+      <button data-theme="Clima" class="theme-card">Clima</button>
+      <button data-theme="Esporte" class="theme-card">Esporte</button>
+      <button data-theme="Economia" class="theme-card">Economia</button>
+    </div>
   </div>
-</div>
 
   <!-- Eventos (cards) -->
-<section class="section section--events" id="eventos">
-  <div class="container">
-    <div class="section__head reveal">
-      <h2>Eventos</h2>
-      <p class="muted">Filtre por tema ou veja tudo no <strong>Geral</strong>.</p>
-    </div>
+  <section class="section section--events" id="eventos">
+    <div class="container">
+      <div class="section__head reveal">
+        <h2>Eventos</h2>
+        <p class="muted">Filtre por tema ou veja tudo no <strong>Geral</strong>.</p>
+      </div>
 
-    <!-- Mantemos o MESMO id="markets" (não pode duplicar) -->
-    <div class="markets markets--page" id="markets">
-      <!-- preenchido via JS -->
-    </div>
+      <!-- ESTE é o ÚNICO id="markets" -->
+      <div class="markets markets--page" id="markets">
+        <!-- preenchido via JS -->
+      </div>
 
-    <div class="events__bottom">
-      <button class="btn btn--ghost btn--sm" id="shuffleBtn">Misturar mercados</button>
+      <div class="events__bottom">
+        <button class="btn btn--ghost btn--sm" id="shuffleBtn">Misturar mercados</button>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <main>
     <!-- Hero -->
@@ -162,31 +155,7 @@
           </p>
         </div>
 
-        <div class="hero__card" aria-label="Painel demonstrativo">
-          <div class="panel">
-            <div class="panel__top">
-              <div class="panel__title">
-                <span class="dot dot--green"></span>
-                <strong>Mercados em destaque</strong>
-              </div>
-              <div class="panel__chips">
-                <span class="chip">Hoje</span>
-                <span class="chip">Semana</span>
-                <span class="chip chip--on">Ao vivo</span>
-              </div>
-            </div>
-
-            <div class="markets" id="markets" style="display:block !important;">
-              <!-- preenchido via JS -->
-            </div>
-
-            <div class="panel__bottom">
-              <div class="hint muted">
-                Clique em um mercado para ver “Yes/No” e a probabilidade (demo).
-              </div>
-              <button class="btn btn--ghost btn--sm" id="shuffleBtn">Misturar mercados</button>
-            </div>
-          </div>
+        
 
           <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden>
             <strong id="toastTitle">Pronto!</strong>
@@ -404,10 +373,10 @@
     <div class="container footer__inner">
       <div>
         <div class="brand brand--footer">
-          <span class="brand__mark">O</Obj></span>
+          <span class="brand__mark">O</span>
           <span class="brand__name">OXXA</span>
         </div>
-        <p class="muted tiny">Template de divulgaçao de paltaforma. © <span id="year"></span></p>
+        <p class="muted tiny">Template de divulgação de plataforma. © <span id="year"></span></p>
       </div>
 
       <div class="footer__links">
@@ -418,9 +387,8 @@
     </div>
   </footer>
 
- <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-
-<script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>

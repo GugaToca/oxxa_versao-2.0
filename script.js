@@ -106,38 +106,58 @@ $$(".reveal").forEach(el => io.observe(el));
 async function loadMarkets() {
   marketsData = [
     {
-      question: "Trump atacará o Irã até março de 2026?",
-      theme: "Política",
+  	  question: "Trump atacará o Irã até março de 2026?",
+  	  theme: "Política",
+      image: "img/trump_ira.png",
       yesShares: 60,
       noShares: 40
-    },
+   },
     {
       question: "Lula será reeleito em 2026?",
       theme: "Política",
+      image: "img/lula.png",
       yesShares: 45,
       noShares: 55
     },
     {
       question: "Vai chover amanhã em São Paulo?",
       theme: "Clima",
+	  image: "img/chuva_saopaulo.png",
       yesShares: 30,
       noShares: 70
     },
     {
       question: "O Brasil ganhará a Copa de 2026?",
       theme: "Esporte",
+	  image: "img/brasil.png",
       yesShares: 50,
       noShares: 50
     },
 	{
       question: "Quem será o Campeão Paulista de 2026?",
       theme: "Esporte",
+	  image: "img/paulistao.png",
       yesShares: 45,
       noShares: 55
     },
 	{
-      question: "O atual regime do Irá irá cair ?",
-      theme: "Politica",
+      question: "O atual regime do Irã irá cair ?",
+      theme: "Política",
+	  image: "img/ira.png",
+      yesShares: 45,
+      noShares: 55
+    },
+	{
+      question: "A inflação Brasileira irá diminuir em 2026??",
+      theme: "Economia",
+	  image: "",
+      yesShares: 45,
+      noShares: 55
+    },
+	{
+      question: "O Dolar irá ultrapassar o valor de R$ 6,00 em 2026? ?",
+      theme: "Economia",
+	  image: "",
       yesShares: 45,
       noShares: 55
     }
@@ -145,58 +165,60 @@ async function loadMarkets() {
 }
 
 function renderMarkets(list) {
-  const wrap = $("#markets");
-  if (!wrap) return;
+  const containers = ["#markets", "#markets-panel"]
+    .map(id => document.querySelector(id))
+    .filter(Boolean);
 
-  wrap.innerHTML = "";
+  containers.forEach(wrap => {
+    wrap.innerHTML = "";
 
-  list.forEach((m, idx) => {
-    const p = clamp(m.p, 0.01, 0.99);
-    let yes = Math.round(p * 100);
-    let no = 100 - yes;
+    list.forEach(m => {
+      const p = clamp(m.p, 0.01, 0.99);
+      let yes = Math.round(p * 100);
+      let no = 100 - yes;
 
-    const el = document.createElement("div");
-    el.className = "market";
-    el.innerHTML = `
-      <div class="market__top">
-        <div class="market__q">${m.q}</div>
-        <div class="market__tag">${m.tag}</div>
-      </div>
-      <div class="market__bar"><span style="width:${yes}%"></span></div>
-      <div class="market__actions">
-        <div class="odds">${yes}% Sim • ${no}% Não</div>
-        <div class="pair">
-          <button data-action="yes">Sim</button>
-          <button data-action="no">Não</button>
+      const el = document.createElement("div");
+      el.className = "market";
+      el.innerHTML = `
+        <div class="market__top">
+  <div class="market__left">
+    <img src="${m.image || 'img/default.png'}" class="market__img">
+    <div class="market__q">${m.q}</div>
+  </div>
+  <div class="market__tag">${m.tag}</div>
+</div>
+
+        <div class="market__bar"><span style="width:${yes}%"></span></div>
+        <div class="market__actions">
+          <div class="odds">${yes}% Sim • ${no}% Não</div>
+          <div class="pair">
+            <button data-action="yes">Sim</button>
+            <button data-action="no">Não</button>
+          </div>
         </div>
-      </div>
-    `;
+      `;
 
-    el.querySelector('[data-action="yes"]').onclick = e => {
-      e.stopPropagation();
-      if (!writeContract) {
-        toast("Carteira não conectada", "Conecte sua carteira para negociar");
-        return;
-      }
-      yes = Math.min(yes + 1, 100);
-      no = 100 - yes;
-      updateMarket(el, yes, no);
-    };
+      el.querySelector('[data-action="yes"]').onclick = e => {
+        e.stopPropagation();
+        if (!writeContract) return toast("Carteira não conectada", "Conecte sua carteira para negociar");
+        yes = Math.min(yes + 1, 100);
+        no = 100 - yes;
+        updateMarket(el, yes, no);
+      };
 
-    el.querySelector('[data-action="no"]').onclick = e => {
-      e.stopPropagation();
-      if (!writeContract) {
-        toast("Carteira não conectada", "Conecte sua carteira para negociar");
-        return;
-      }
-      no = Math.min(no + 1, 100);
-      yes = 100 - no;
-      updateMarket(el, yes, no);
-    };
+      el.querySelector('[data-action="no"]').onclick = e => {
+        e.stopPropagation();
+        if (!writeContract) return toast("Carteira não conectada", "Conecte sua carteira para negociar");
+        no = Math.min(no + 1, 100);
+        yes = 100 - no;
+        updateMarket(el, yes, no);
+      };
 
-    wrap.appendChild(el);
+      wrap.appendChild(el);
+    });
   });
 }
+
 
 function updateMarket(el, yes, no) {
   el.querySelector(".odds").textContent = `${yes}% Sim • ${no}% Não`;
@@ -204,14 +226,26 @@ function updateMarket(el, yes, no) {
 }
 
 function updateView() {
+  const theme = (currentTheme || "").trim().toLowerCase();
+
+  let filtered = marketsData;
+
+  if (theme && theme !== "geral") {
+    filtered = marketsData.filter(m =>
+      (m.theme || "").trim().toLowerCase() === theme
+    );
+  }
+
   renderMarkets(
-    marketsData.map(m => ({
-      q: m.question,
-      tag: m.theme,
-      p: m.yesShares / (m.yesShares + m.noShares)
-    }))
-  );
+  filtered.map(m => ({
+    q: m.question,
+    tag: m.theme,
+    image: m.image, // ✅ passa a imagem pro card
+    p: m.yesShares / (m.yesShares + m.noShares)
+  }))
+);
 }
+
 
 // ================== CONECTAR CARTEIRA (CORRIGIDO) ==================
 async function connectWallet() {
@@ -253,17 +287,25 @@ window.addEventListener("load", async () => {
   updateView();
 });
 
-let currentTheme = "Geral";
+let currentTheme = "geral";
 
 document.querySelectorAll("#theme-filters .theme-card").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll(".theme-card").forEach(b => b.classList.remove("active"));
+    document
+      .querySelectorAll("#theme-filters .theme-card")
+      .forEach(b => b.classList.remove("active"));
+
     btn.classList.add("active");
 
-    currentTheme = btn.dataset.theme;
+    currentTheme = (btn.dataset.theme || "geral")
+      .trim()
+      .toLowerCase();
+
     updateView();
   });
 });
+
+
 
 function shuffleArray(arr){
   const a = arr.slice();
