@@ -1167,3 +1167,57 @@ p{ color: var(--muted) !important; }
   }
 
 }
+
+/* =========================================================
+   MOBILE MENU FIX — NÃO EMPURRA O CONTEÚDO
+   ========================================================= */
+
+@media (max-width: 768px){
+
+  .header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+  }
+
+  /* Mantém o header estável */
+  .header__inner{
+    position: relative;
+    z-index: 2;
+  }
+
+  /* MOBILE MENU — vira overlay */
+  #mobileMenu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--panel2);
+    border-bottom: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    padding: 12px 0;
+    z-index: 1;
+  }
+
+  /* Quando hidden, some SEM ocupar espaço */
+  #mobileMenu[hidden]{
+    display: none;
+  }
+
+  /* Links mobile alinhados */
+  .mobile__inner{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* Filtros colados ao header */
+  #theme-filters{
+    margin-top: 8px !important;
+  }
+
+  main{
+    padding-top: 6px;
+  }
+}
