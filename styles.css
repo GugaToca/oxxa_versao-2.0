@@ -1304,3 +1304,21 @@ p{ color: var(--muted) !important; }
   background: rgba(108,134,255,0.25);
   color: #9fb2ff;
 }
+
+
+
+
+/* ===========================
+   HEADER MAIS À ESQUERDA (MOBILE)
+   =========================== */
+
+@media (max-width: 768px){
+  .header .container{
+    padding-left: 10px !important;
+    padding-right: 22px !important;
+  }
+
+  .brand{
+    margin-left: 4px;
+  }
+}
