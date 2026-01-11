@@ -994,3 +994,119 @@ p{ color: var(--muted) !important; }
 }
 
 /* Fim do patch */
+
+
+/* =========================================================
+   RESPONSIVIDADE MOBILE – AJUSTE FINO
+   ========================================================= */
+
+@media (max-width: 768px){
+
+  /* Container geral */
+  .container{
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  /* HEADER */
+  header{
+    padding: 12px 0;
+  }
+
+  header .container{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  /* Logo não esmagar */
+  .logo,
+  .brand{
+    max-width: 140px;
+  }
+
+  /* Botões do header */
+  header .btn,
+  header button{
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* FILTROS DE TEMA */
+  #theme-filters{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+  }
+
+  #theme-filters .theme-filters__inner{
+    display:flex;
+    flex-wrap: nowrap;
+    gap:8px;
+  }
+
+  .theme-card{
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* GRID DE MERCADOS */
+  .markets--page{
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  /* CARD */
+  .market{
+    padding: 14px;
+  }
+
+  .market__top{
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .market__left{
+    gap:8px;
+  }
+
+  .market__img{
+    width: 34px;
+    height: 34px;
+  }
+
+  .market__q{
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .market__tag{
+    font-size: 10px;
+    padding: 2px 6px;
+    margin-left: auto;
+  }
+
+  /* AÇÕES */
+  .market__actions{
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .market__actions .odds{
+    font-size: 13px;
+  }
+
+  .market__actions .pair{
+    display:flex;
+    gap:10px;
+  }
+
+  .market__actions .pair button{
+    flex:1;
+    margin:0;
+    padding: 10px 0;
+    font-size: 14px;
+  }
+}
