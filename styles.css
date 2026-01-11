@@ -1244,7 +1244,7 @@ p{ color: var(--muted) !important; }
     right: 0;
     background: var(--panel2);
     border-bottom: 1px solid var(--stroke);
-    box-shadow: 0 12px 28px rgba(0,0,0,.25);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.842);
     padding: 16px 0;
     z-index: 1999;
   }
@@ -1258,7 +1258,7 @@ p{ color: var(--muted) !important; }
     content:"";
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.35);
+    background: rgba(0, 0, 0, 0.829);
     backdrop-filter: blur(2px);
     z-index: 1000;
   }
