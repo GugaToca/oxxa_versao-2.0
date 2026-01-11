@@ -1110,3 +1110,60 @@ p{ color: var(--muted) !important; }
     font-size: 14px;
   }
 }
+
+/* =========================================================
+   MOBILE HEADER FIX (MENU NÃO EMPURRA CONTEÚDO)
+   ========================================================= */
+
+@media (max-width: 768px){
+
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+  }
+
+  /* container interno sempre estável */
+  header .container{
+    position: relative;
+    z-index: 2;
+  }
+
+  /* MENU MOBILE – vira overlay */
+  .nav{
+    position: absolute !important;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--panel2);
+    border-bottom: 1px solid var(--stroke);
+    box-shadow: var(--shadow);
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s ease;
+  }
+
+  .nav.open{
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* evita pulo de layout ao abrir menu */
+  body{
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* FILTROS COLADOS NO HEADER */
+  #theme-filters{
+    margin-top: 6px !important;
+    padding-top: 0 !important;
+  }
+
+  main{
+    padding-top: 8px;
+  }
+
+}
