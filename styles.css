@@ -271,7 +271,7 @@ img{ max-width:100%; display:block; }
   padding: 12px 14px;
   border-radius: 14px;
   border: 1px solid var(--stroke);
-  background: var(--panel);
+  background: rgb(255 255 255 / 5%);
   font-weight: 800;
 }
 
@@ -1273,4 +1273,34 @@ p{ color: var(--muted) !important; }
     pointer-events: none;
     user-select: none;
   }
+}
+
+/* ===========================
+   CORES DOS LINKS DO MENU MOBILE
+   =========================== */
+
+.mobile__link{
+  color: #f0f1f3;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 0;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background .15s ease, color .15s ease;
+}
+
+/* hover / toque */
+.mobile__link:hover{
+  background: rgba(228, 229, 231, 0.918);
+  color: var(--primary);
+}
+
+/* tema escuro */
+:root[data-theme="dark"] .mobile__link{
+  color: #fff;
+}
+
+:root[data-theme="dark"] .mobile__link:hover{
+  background: rgba(108,134,255,0.25);
+  color: #9fb2ff;
 }
